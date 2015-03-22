@@ -23,13 +23,21 @@
 	    + '<div>'
 	      + '<ul class="nav navbar-nav">'
 	        + '<li class="active"><a href="#">Home</a></li>'
-	        + '<li><a href="#">Page 1</a></li>'
-	        + '<li><a href="#">Page 2</a></li>'
-	        + '<li><a href="#">Page 3</a></li>'
+	        + '<li><a href="#/match">Page 1</a></li>'
+	        + '<li><a href="#/page2">Page 2</a></li>'
+	        + '<li><a href="#/page3">Page 3</a></li>'
 	      + '</ul>'
 	    + '</div>'
 	  + '</div>'
 	+ '</nav>'
+	+ '<div class="container">'
+	  + '<div class="row">'
+	    + '<div class="col-sm-6" style="background-color:lavender;">'
+	    + '</div>'
+	    + '<div class="col-sm-6" style="background-color:lavender;">'
+	    + '</div>'
+	  + '</div>'
+	+ '</div>'
     },
     stateMap = { $container : null },
     jqueryMap = {},
@@ -51,6 +59,12 @@
   //------------------END DOM METHODS---------------------
   
   //------------------BEGIN EVENT HANDLERS----------------
+  
+  // switch to page1
+  pageOne = function( event ) {
+    
+  }
+
   //------------------END EVENT HANDLERS------------------
   
   //------------------BEGIN PUBLIC METHODS----------------
@@ -59,6 +73,8 @@
     stateMap.$container = $container;
     $container.html( configMap.main_html );
     setJqueryMap();
+
+
   };
   
 
