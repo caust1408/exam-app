@@ -15,16 +15,29 @@ match_form = function( jqueryMap ) {
   // display all the statments(questions) as paragraph from the data 
   for (var i = 0; i < data.length; ++i){
     jqueryMap.$main.append('<div class="row"></div>');
-    $('.row:last').append('<div class="col-sm-6"></div>');
-    $('.col-sm-6:last').append("<p></p>");
+    $('.row:last').append('<div class="col-xs-12 col-md-6"></div>');
+    $('.col-md-6:last').append("<p></p>");
     var question = data[i].text;
     $("p:last").html( question );
 
     // create and add answears
-    $('.row:last').append('<div class="col-sm-6"></div>');
-    $('.col-sm-6:last').append("<p></p>");
-    var answear = data[i].value;
-    $('p:last').html( answear );
+    $('.row:last').append('<div class="col-xs-12 col-md-6"></div>');
+    $('.col-md-6:last').append(
+      '<div class="form-group">'
+        + '<label for="sel1">Select your answear:</label>'
+	+ '<select class="form-control" id="sel1">'
+	  + '<option></option>'
+	+ '</select>'
+      + '</div>'
+    );
+
+    for (var j = 0; j < data.length; ++j) {
+      $('select:last').append('<option></option>');
+      var answear = data[j].value;
+      $('option:last').html(answear);
+    }
+    //var answear = data[i].value;
+    //$('p:last').html( answear );
   }
 
 }
