@@ -6,10 +6,7 @@
 
 match_form = function( jqueryMap ) {
   console.log("match_form");
-
-  //jqueryMap.$main.prepend("<p>Appeneded paragraph</p>");
-  // get the JSON file
-  //var data = require("./matchJson.js");
+ 
   var data = MATCH; // set data to JSON data
   //var elements = JSON.parse(data);
   jqueryMap.$main.empty();    // clear the content of the $main container
@@ -17,9 +14,17 @@ match_form = function( jqueryMap ) {
 
   // display all the statments(questions) as paragraph from the data 
   for (var i = 0; i < data.length; ++i){
-    jqueryMap.$main.append("<p></p>");
+    jqueryMap.$main.append('<div class="row"></div>');
+    $('.row:last').append('<div class="col-sm-6"></div>');
+    $('.col-sm-6:last').append("<p></p>");
     var question = data[i].text;
     $("p:last").html( question );
+
+    // create and add answears
+    $('.row:last').append('<div class="col-sm-6"></div>');
+    $('.col-sm-6:last').append("<p></p>");
+    var answear = data[i].value;
+    $('p:last').html( answear );
   }
 
 }
