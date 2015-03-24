@@ -23,7 +23,7 @@
 	    + '<div>'
 	      + '<ul class="nav navbar-nav">'
 	        + '<li class="active"><a href="#">Home</a></li>'
-	        + '<li><a href="#/match">Page 1</a></li>'
+	        + '<li class="matchbtn"><a href="#/match">Page 1</a></li>'
 	        + '<li><a href="#/page2">Page 2</a></li>'
 	        + '<li><a href="#/page3">Page 3</a></li>'
 	      + '</ul>'
@@ -41,6 +41,7 @@
     },
     stateMap = { $container : null },
     jqueryMap = {},
+    onTapList,
     setJqueryMap, initModule;
   //------------------END MODULE SCOPE VAR----------------
 
@@ -52,7 +53,10 @@
   setJqueryMap = function () {
     var $container = stateMap.$container;
     jqueryMap = {
-      $container     : $container 
+      $container     : $container,
+      $menu	 : $container.find('.cem-shell-list-menu'),
+      $mbt     : $container.find('.matchbtn'),
+      $main    : $container.find('.container')
     }
   };  // end setJqueryMap
 
@@ -62,9 +66,28 @@
   
   // switch to page1
   pageOne = function( event ) {
-    
+    console.log("Match clicked");
+    console.log(document.location.hash);
+    //jqueryMap.$main.append('<p class="proba">Danilo Zekovic</p>');
+    jqueryMap.$main.append(match_form( jqueryMap ));
   }
 
+  onTapList = function ( event ) {
+    // React to taps on menu in nav div
+    var menu_item  = $(this).data("id");
+    console.log('Tapped on ' + menu_item);
+    console.log("click");
+    switch(menu_item) {
+
+      case 'match':
+        console.log("match clicked");
+	break;
+      case 'page1': 
+	console.log("page1");
+	break;
+    }
+        return false;
+  };
   //------------------END EVENT HANDLERS------------------
   
   //------------------BEGIN PUBLIC METHODS----------------
@@ -73,8 +96,9 @@
     stateMap.$container = $container;
     $container.html( configMap.main_html );
     setJqueryMap();
-
-
+    
+    jqueryMap.$menu.bind( 'click', onTapList   ); 
+    jqueryMap.$mbt.click(pageOne);
   };
   
 
