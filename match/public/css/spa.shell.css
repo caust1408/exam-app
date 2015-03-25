@@ -3,4 +3,23 @@
  * Your CSS
  */
 
+.container {
+  position : relative;  
+  background-color : orange;
+}
 
+@media (max-width:768px) {
+  .container {
+    position : absolute;
+    left : 0;
+    right : 0;
+    background-color : blue;
+  }
+
+  #spa {
+    position : static;
+    min-height : 100%;
+    min-width  : 0;
+
+  }
+}
