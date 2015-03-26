@@ -4,9 +4,9 @@
  * contains the logic for page 1, that will represent the match problems
  */
 
-match_form = function( jqueryMap ) {
-  console.log("match_form");
- 
+match_form = function( jqueryMap, visited ) {
+  console.log("match_form" + visited);
+  
   var data = MATCH; // set data to JSON data
   //var elements = JSON.parse(data);
   jqueryMap.$main.empty();    // clear the content of the $main container
@@ -14,11 +14,15 @@ match_form = function( jqueryMap ) {
 
   // display all the statments(questions) as paragraph from the data 
   for (var i = 0; i < data.length; ++i){
+    // created the row to place the bootstrap collumns into it
     jqueryMap.$main.append('<div class="row"></div>');
-    $('.row:last').append('<div class="col-xs-12 col-md-6"></div>');
-    $('.col-md-6:last').append("<p></p>");
+    // bootstrap collumns
+    // xs for phone size will have one collumn
+    // md medium desktop and grater will have two 
+    $('.row:last').append('<div class="col-xs-12 col-md-6"></div>');  // append it to row div
+    $('.col-md-6:last').append('<label></label>'); //append it to collumn
     var question = data[i].text;
-    $("p:last").html( question );
+    $("label:last").html( question );
 
     // create and add answears
     $('.row:last').append('<div class="col-xs-12 col-md-6"></div>');

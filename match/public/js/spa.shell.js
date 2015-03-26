@@ -48,6 +48,13 @@
     },
     stateMap = { $container : null },
     jqueryMap = {},
+    // to keep track of visited pages
+    visited = {
+      home  : false,
+      match : false,
+      page2 : false,
+      page3 : false
+    },
     onTapList,
     setJqueryMap, initModule;
   //------------------END MODULE SCOPE VAR----------------
@@ -76,7 +83,8 @@
     console.log("Match clicked");
     console.log(document.location.hash);
     //jqueryMap.$main.append('<p class="proba">Danilo Zekovic</p>');
-    jqueryMap.$main.append(match_form( jqueryMap ));
+    jqueryMap.$main.append(match_form( jqueryMap, visited.match ));
+    visited.match = true; // when page visited change it to true
   }
 
   onTapList = function ( event ) {
