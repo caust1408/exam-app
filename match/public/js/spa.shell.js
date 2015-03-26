@@ -1,5 +1,8 @@
 /* 
  * spa.shell.js
+ * Danilo Zekovic
+ * Makes the logic of the app going
+ * app is meant to represent the online version of the exam
  */
 
 /*jslint         browser : true, continue : true,
@@ -25,14 +28,14 @@
 	        + '<span class="icon-bar"></span>'
 	        + '<span class="icon-bar"></span>'
 	      + '</button>'
-	      + '<a class="navbar-brand" href="#">ExameApp</a>'
+	      + '<a class="navbar-brand" href="#">ExamApp</a>'
 	    + '</div>'
 	    + '<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" styleheight: 1px;">'
 	      + '<ul class="nav navbar-nav">'
 	        + '<li class="active"><a href="#">Home</a></li>'
-	        + '<li class="matchbtn" aria-expanded="true"><a href="#/match">Page 1</a></li>'
-	        + '<li><a href="#/page2">Page 2</a></li>'
-	        + '<li><a href="#/page3">Page 3</a></li>'
+	        + '<li class="matchbtn" ><a href="#/match">Match</a></li>'
+	        + '<li><a class="page2" href="#/page2">Page 2</a></li>'
+	        + '<li><a class="page3" href="#/page3">Page 3</a></li>'
 	      + '</ul>'
 	    + '</div>'
 	  + '</div>'
@@ -68,9 +71,10 @@
     var $container = stateMap.$container;
     jqueryMap = {
       $container     : $container,
-      $menu	 : $container.find('.cem-shell-list-menu'),
-      $mbt     : $container.find('.matchbtn'),
-      $main    : $container.find('.container')
+      $menu          : $container.find('.cem-shell-list-menu'),
+      $mbt           : $container.find('.matchbtn'),
+      $p2bt          : $container.find('.page2'),
+      $main          : $container.find('.container')
     }
   };  // end setJqueryMap
 
@@ -85,6 +89,14 @@
     //jqueryMap.$main.append('<p class="proba">Danilo Zekovic</p>');
     jqueryMap.$main.append(match_form( jqueryMap, visited.match ));
     visited.match = true; // when page visited change it to true
+  }
+
+  pageTwo = function ( event ) {
+    console.log("Page2 clicked " + visited.page2);
+    console.log(document.location.hash);
+    jqueryMap.$main.hide();
+
+    visited.page2 = true;
   }
 
   onTapList = function ( event ) {
@@ -114,6 +126,7 @@
     
     jqueryMap.$menu.bind( 'click', onTapList   ); 
     jqueryMap.$mbt.click(pageOne);
+    jqueryMap.$p2bt.click(pageTwo);
   };
   
 
