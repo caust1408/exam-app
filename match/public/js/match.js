@@ -12,12 +12,13 @@ match_form = function( jqueryMap, visited ) {
   // if the page was visited just show it again
   // else create the content of the page
   if (visited){
-    jqueryMap.$main.show();
+    jqueryMap.$match.show();
   }else{
+    jqueryMap.$match.show();
     // display all the statments(questions) as paragraph from the data 
     for (var i = 0; i < data.length; ++i){
       // created the row to place the bootstrap collumns into it
-      jqueryMap.$main.append('<div class="row"></div>');
+      jqueryMap.$match.append('<div class="row"></div>');
     
       // bootstrap collumns
       // xs for phone size will have one collumn

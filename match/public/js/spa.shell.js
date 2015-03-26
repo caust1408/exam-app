@@ -34,19 +34,18 @@
 	      + '<ul class="nav navbar-nav">'
 	        + '<li class="active"><a href="#">Home</a></li>'
 	        + '<li class="matchbtn" ><a href="#/match">Match</a></li>'
-	        + '<li><a class="page2" href="#/page2">Page 2</a></li>'
-	        + '<li><a class="page3" href="#/page3">Page 3</a></li>'
+	        + '<li><a class="page2" href="#/page2">Nathan</a></li>'
+	        + '<li><a class="page3" href="#/page3">Craig</a></li>'
+		+ '<li><a class="page4" href="#/page4">Ryan</a></li>'
 	      + '</ul>'
 	    + '</div>'
 	  + '</div>'
 	+ '</nav>'
-	+ '<div class="container">'
-	  //+ '<div class="row">'
-	   // + '<div class="col-sm-6" style="background-color:lavender;">'
-	   // + '</div>'
-	   // + '<div class="col-sm-6" style="background-color:lavender;">'
-	   // + '</div>'
-	 // + '</div>'
+	+ '<div class="container main-container">'
+	  + '<div class="container match"></div>'
+	  + '<div class="container short-ans"></div>'
+	  + '<div class="container multiple-choice"></div>'
+	  + '<div class="container true-false"></div>'
 	+ '</div>'
     },
     stateMap = { $container : null },
@@ -58,11 +57,20 @@
       page2 : false,
       page3 : false
     },
-    onTapList,
+    onTapList, hideDiv,
     setJqueryMap, initModule;
   //------------------END MODULE SCOPE VAR----------------
 
   //------------------BEGIN UTILITY METHODS---------------
+  
+  // hide any div in $main
+  hideDiv = function () {
+    jqueryMap.$match.hide();
+    jqueryMap.$multiC.hide();
+    jqueryMap.$fillin.hide();
+    jqueryMap.$tf.hide();
+  }
+
   //------------------END UTILITY METHODS-----------------
 
   //------------------BEGIN DOM METHODS-------------------
@@ -74,7 +82,13 @@
       $menu          : $container.find('.cem-shell-list-menu'),
       $mbt           : $container.find('.matchbtn'),
       $p2bt          : $container.find('.page2'),
-      $main          : $container.find('.container')
+      $p3bt          : $container.find('.page3'),
+      $p4bt          : $container.find('.page4'),
+      $main          : $container.find('.main-container'),
+      $match         : $container.find('.match'),
+      $fillin        : $container.find('.short-ans'),
+      $multiC        : $container.find('.multiple-choice'),
+      $tf            : $container.find('.true-false')
     }
   };  // end setJqueryMap
 
@@ -86,17 +100,28 @@
   pageOne = function( event ) {
     console.log("Match clicked");
     console.log(document.location.hash);
-    //jqueryMap.$main.append('<p class="proba">Danilo Zekovic</p>');
+   
+    hideDiv();
+
     jqueryMap.$main.append(match_form( jqueryMap, visited.match ));
+
     visited.match = true; // when page visited change it to true
   }
 
   pageTwo = function ( event ) {
     console.log("Page2 clicked " + visited.page2);
     console.log(document.location.hash);
-    jqueryMap.$main.hide();
+    
+    hideDiv();
 
     visited.page2 = true;
+  }
+
+  pageThree = function ( event ) {
+    console.log("Page3 clicked " + visited.page3);
+    console.log(document.location.hash);
+    hideDiv();   // hide any div thet is showing in $main
+    visited.page3 = true;
   }
 
   onTapList = function ( event ) {
@@ -127,6 +152,7 @@
     jqueryMap.$menu.bind( 'click', onTapList   ); 
     jqueryMap.$mbt.click(pageOne);
     jqueryMap.$p2bt.click(pageTwo);
+    jqueryMap.$p3bt.click(pageThree);
   };
   
 
