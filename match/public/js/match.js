@@ -38,14 +38,42 @@ match_form = function( jqueryMap, visited ) {
 	  + '</select>'
         + '</div>'
       );
-
+      // to keep track of elements already selected
+      var selected = [];
+      for (var k = 0; k < data.length; ++k) {
+        selected[k] = false;
+      }
+      // loop until all the elements have been added to the list 
+      while (isAllSelected(selected)){
+	// get the random number between 0 and the number of elements
+	var num = Math.floor((Math.random() * data.length));
+	// check if the number has been selected befor if not than add it
+        if(selected[num] != true){
+	  $('select:last').append('<option></option>');
+	  var answer = data[num].value;
+	  $('option:last').html(answer);
+	  selected[num] = true;
+	}
+	console.log(num + " random num");
+      }
+/*
       for (var j = 0; j < data.length; ++j) {
         $('select:last').append('<option></option>');
         var answear = data[j].value;
         $('option:last').html(answear);
-      } 
-      //var answear = data[i].value;
-      //$('p:last').html( answear );
-    }
+      } */
+    } // end for
   } // end if
 } // end match_form
+
+// to check are have all the elements already been selected
+var isAllSelected = function(selected) {
+  for (var i = 0; i < selected.length; ++i){
+    if (selected[i]){
+      continue;
+    }else{
+      return true;
+    }
+  }
+  return false;
+}
