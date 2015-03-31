@@ -56,9 +56,13 @@ match_form = function( jqueryMap, visited ) {
 	} // end if
       } // end while
     } // end for
+
+    // adds the button to the end of the div
+    // it will check the answers 
+    // and display the number of corect and missed questions
     var buttonString = '<div class="row">'
 	                 + '<div class="col-xs-12 submit">'
-			   + '<button type="button" class="btn btn-primary btn-block">Submit</button>'
+			   + '<button type="button" class="btn btn-primary btn-block submit">Submit</button>'
     jqueryMap.$match.append(buttonString)
   } // end if else
 } // end match_form
