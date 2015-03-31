@@ -12,6 +12,10 @@
   padding : 1em;
 }
 
+li:hover {
+  background-color : #080808;
+}
+
 @media (max-width:768px) {
   .container {
     position : absolute;
