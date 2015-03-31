@@ -53,17 +53,14 @@ match_form = function( jqueryMap, visited ) {
 	  var answer = data[num].value;
 	  $('option:last').html(answer);
 	  selected[num] = true;
-	}
-	console.log(num + " random num");
-      }
-/*
-      for (var j = 0; j < data.length; ++j) {
-        $('select:last').append('<option></option>');
-        var answear = data[j].value;
-        $('option:last').html(answear);
-      } */
+	} // end if
+      } // end while
     } // end for
-  } // end if
+    var buttonString = '<div class="row">'
+	                 + '<div class="col-xs-12 submit">'
+			   + '<button type="button" class="btn btn-primary btn-block">Submit</button>'
+    jqueryMap.$match.append(buttonString)
+  } // end if else
 } // end match_form
 
 // to check are have all the elements already been selected
@@ -76,4 +73,8 @@ var isAllSelected = function(selected) {
     }
   }
   return false;
+}
+
+var checkScore = function(){
+  
 }
