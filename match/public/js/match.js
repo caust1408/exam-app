@@ -8,6 +8,11 @@ match_form = function( jqueryMap, visited ) {
   console.log("match_form" + visited);
   
   var data = MATCH; // set data to JSON data
+  
+
+  // array to keep the corect answers
+  var solutions = [];
+
 
   // if the page was visited just show it again
   // else create the content of the page
@@ -26,6 +31,7 @@ match_form = function( jqueryMap, visited ) {
       $('.row:last').append('<div class="col-xs-12 col-md-6"></div>');  // append it to row div
       $('.col-md-6:last').append('<label></label>'); //append it to collumn
       var question = data[i].text;
+      solutions[i] = data[i].value;
       $("label:last").html( question );
 
       // create and add answears
@@ -33,7 +39,7 @@ match_form = function( jqueryMap, visited ) {
       $('.col-md-6:last').append(
         '<div class="form-group">'
           + '<label for="sel1">Select your answear:</label>'
-	  + '<select class="form-control" id="sel1">'
+	  + '<select class="form-control match-ans" id="sel1">'
 	    + '<option></option>'
 	  + '</select>'
         + '</div>'
@@ -62,8 +68,10 @@ match_form = function( jqueryMap, visited ) {
     // and display the number of corect and missed questions
     var buttonString = '<div class="row">'
 	                 + '<div class="col-xs-12 submit">'
-			   + '<button type="button" class="btn btn-primary btn-block submit">Submit</button>'
-    jqueryMap.$match.append(buttonString)
+			   + '<button type="button" class="btn btn-primary btn-block submit-btn">Submit</button>'
+    jqueryMap.$match.append(buttonString);
+    console.log(solutions.toString());
+    $('.submit-btn').click({solutions:solutions},grade);
   } // end if else
 } // end match_form
 
@@ -82,3 +90,33 @@ var isAllSelected = function(selected) {
 var checkScore = function(){
   
 }
+
+var grade = function( event ) {
+  var solutions = event.data.solutions;
+  console.log("Submit Clicked " + solutions.toString());
+
+  var ans = []; // array to store user answers
+  var i = 0;    // to keep the place to store the value in ans array
+  // move through all the input lists and get the selected value
+  $('.match-ans').each(function() {
+    ans[i] = $(this).val();
+    console.log($(this).val());
+    i++;
+  });
+
+  var wrong = 0;
+  var correct = 0;
+
+  // check are the answers correct
+  // unanswered questions will be considered wrong
+  for (var j = 0; j< solutions.length; ++j){
+    if (ans[j] == solutions[j]){
+      correct++;
+    }else{
+      wrong++;
+    }
+  }
+
+  console.log("correct answers: " + correct + " wrong ans: " + wrong);
+
+}  // end grade
