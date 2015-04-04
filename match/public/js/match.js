@@ -69,6 +69,8 @@ match_form = function( jqueryMap, visited ) {
     var buttonString = '<div class="row">'
 	                 + '<div class="col-xs-12 submit">'
 			   + '<button type="button" class="btn btn-primary btn-block submit-btn">Submit</button>'
+			 + '</div>'
+		       + '</div>';
     jqueryMap.$match.append(buttonString);
     console.log(solutions.toString());
     $('.submit-btn').click({solutions:solutions},grade);
@@ -118,5 +120,15 @@ var grade = function( event ) {
   }
 
   console.log("correct answers: " + correct + " wrong ans: " + wrong);
-
+  $('.match').empty();
+  $('.match').append(
+     '<div class="row">'
+      + '<div class="col-xs-12">'
+        + '<label></label>'
+      + '</div>'
+    + '</div>'
+  );
+  var str = 'Correct: ' + correct + ', wrong: ' + wrong;
+  console.log(str);
+  $('label:first').html(str);
 }  // end grade
