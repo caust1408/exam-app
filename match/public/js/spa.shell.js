@@ -18,35 +18,35 @@
   var
     configMap = {
       main_html : String()
-	+ '<nav class="navbar navbar-inverse navbar-fixed-top">'
-	  + '<div class="container-fluid">'
-	    + '<div class="navbar-header">'
-	      + '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">'
-	        + '<span class="sr-only">Toggle navigation</span>'
-	        + '<span class="icon-bar"></span>'
-	        + '<span class="icon-bar"></span>'
-	        + '<span class="icon-bar"></span>'
-	        + '<span class="icon-bar"></span>'
-	      + '</button>'
-	      + '<a class="navbar-brand" href="#">ExamApp</a>'
-	    + '</div>'
-	    + '<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" styleheight: 1px;">'
-	      + '<ul class="nav navbar-nav">'
-	        + '<li class="active"><a href="#">Home</a></li>'
-	        + '<li class="matchbtn" ><a href="#/match">Match</a></li>'
-	        + '<li><a class="page2" href="#/page2">Nathan</a></li>'
-	        + '<li><a class="page3" href="#/page3">Craig</a></li>'
-		+ '<li><a class="page4" href="#/page4">Ryan</a></li>'
-	      + '</ul>'
-	    + '</div>'
-	  + '</div>'
-	+ '</nav>'
-	+ '<div class="container main-container">'
-	  + '<div class="container match"></div>'
-	  + '<div class="container short-ans"></div>'
-	  + '<div class="container multiple-choice"></div>'
-	  + '<div class="container true-false"></div>'
-	+ '</div>'
+  + '<nav class="navbar navbar-inverse navbar-fixed-top">'
+    + '<div class="container-fluid">'
+      + '<div class="navbar-header">'
+        + '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">'
+          + '<span class="sr-only">Toggle navigation</span>'
+          + '<span class="icon-bar"></span>'
+          + '<span class="icon-bar"></span>'
+          + '<span class="icon-bar"></span>'
+          + '<span class="icon-bar"></span>'
+        + '</button>'
+        + '<a class="navbar-brand" href="#">ExamApp</a>'
+      + '</div>'
+      + '<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" styleheight: 1px;">'
+        + '<ul class="nav navbar-nav">'
+          + '<li class="active"><a href="#">Home</a></li>'
+          + '<li class="matchbtn" ><a href="#/match">Match</a></li>'
+          + '<li><a class="page2" href="#/page2">Nathan</a></li>'
+          + '<li><a class="page3" href="#/page3">Craig</a></li>'
+    + '<li><a class="page4" href="#/page4">Ryan</a></li>'
+        + '</ul>'
+      + '</div>'
+    + '</div>'
+  + '</nav>'
+  + '<div class="container main-container">'
+    + '<div class="container match"></div>'
+    + '<div class="container fillin"></div>'
+    + '<div class="container choice"></div>'
+    + '<div class="container true-false"></div>'
+  + '</div>'
     },
     stateMap = { $container : null },
     jqueryMap = {},
@@ -55,7 +55,8 @@
       home  : false,
       match : false,
       page2 : false,
-      page3 : false
+      page3 : false,
+      page4 : false
     },
     onTapList, hideDiv,
     setJqueryMap, initModule;
@@ -66,7 +67,7 @@
   // hide any div in $main
   hideDiv = function () {
     jqueryMap.$match.hide();
-    jqueryMap.$multiC.hide();
+    jqueryMap.$choice.hide();
     jqueryMap.$fillin.hide();
     jqueryMap.$tf.hide();
   }
@@ -86,9 +87,10 @@
       $p4bt          : $container.find('.page4'),
       $main          : $container.find('.main-container'),
       $match         : $container.find('.match'),
-      $fillin        : $container.find('.short-ans'),
-      $multiC        : $container.find('.multiple-choice'),
-      $tf            : $container.find('.true-false')
+      $fillin        : $container.find('.fillin'),
+      $choice        : $container.find('.choice'),
+      $tf            : $container.find('.true-false'),
+      $nav           : $container.find('.nav-navbar')
     }
   };  // end setJqueryMap
 
@@ -96,32 +98,53 @@
   
   //------------------BEGIN EVENT HANDLERS----------------
   
-  // switch to page1
+  // switch to page1, match
   pageOne = function( event ) {
     console.log("Match clicked");
     console.log(document.location.hash);
    
-    hideDiv();
-
+    hideDiv(); // hide curent content of the main div
+    
+    // add requested page content
     jqueryMap.$main.append(match_form( jqueryMap, visited.match ));
 
     visited.match = true; // when page visited change it to true
   }
 
+  // switch to page2, fillin
   pageTwo = function ( event ) {
     console.log("Page2 clicked " + visited.page2);
     console.log(document.location.hash);
     
-    hideDiv();
+    hideDiv(); // hide curent content of the main div
+    
+    // add requested page content to the main div
+    jqueryMap.$main.append(fillin_form( jqueryMap, visited.page2 ));
 
-    visited.page2 = true;
+    visited.page2 = true; // page visited
   }
 
   pageThree = function ( event ) {
     console.log("Page3 clicked " + visited.page3);
     console.log(document.location.hash);
-    hideDiv();   // hide any div thet is showing in $main
-    visited.page3 = true;
+    hideDiv();   // hide curent content of the main div
+    
+    jqueryMap.$main.append(choice_form( jqueryMap, visited.page3 ));
+    // add requested page content to the main div TODO
+    //jqueryMap.$main.append(mult_choice_form( jqueryMap, visited.page3 ));
+
+    visited.page3 = true; // page visited
+  }
+
+  pageFour = function ( event ) {
+    console.log("Page4 clicked " + visited.page4);
+    console.log(document.location.hash);
+    hideDiv();  // hide curent content of the main div
+
+    // add requested page content to the main div
+    // jqueryMap.$main.append(tf_form( jqueryMap, visited.page4 ));
+
+    visited.page4 = true; // page visited
   }
 
   onTapList = function ( event ) {
@@ -133,13 +156,22 @@
 
       case 'match':
         console.log("match clicked");
-	break;
+  break;
       case 'page1': 
-	console.log("page1");
-	break;
+  console.log("page1");
+  break;
+      case 'page2':
+  console.log("page2");
+  break;
+      case 'page3':
+  console.log("page3");
+  break;
+      case 'page4':
+  console.log("page4");
+  break;
     }
-        return false;
-  };
+    return false;
+  }; // end onTapList
   //------------------END EVENT HANDLERS------------------
   
   //------------------BEGIN PUBLIC METHODS----------------
@@ -148,11 +180,28 @@
     stateMap.$container = $container;
     $container.html( configMap.main_html );
     setJqueryMap();
+
+
+    jqueryMap.$main.append(match_form( jqueryMap, visited.match ));
+    jqueryMap.$main.append(fillin_form( jqueryMap, visited.page2 ));
+    jqueryMap.$main.append(choice_form( jqueryMap, visited.page3 ));
+    //jqueryMap.$main.append(fillin_form( jqueryMap, visited.page3 ));
+    //jqueryMap.$main.append(fillin_form( jqueryMap, visited.page4 ));
+    visited.match = true;
+    visited.page2 = true;
+    visited.page3 = true;
+
+    hideDiv();
     
-    jqueryMap.$menu.bind( 'click', onTapList   ); 
+    jqueryMap.$nav.bind( 'click', onTapList   ); 
     jqueryMap.$mbt.click(pageOne);
     jqueryMap.$p2bt.click(pageTwo);
     jqueryMap.$p3bt.click(pageThree);
+    jqueryMap.$p4bt.click(pageFour);
+
+
+    // trying to make routing work
+    //jqueryMap.$menu.bind( 'click', onTapList );
   };
   
 
