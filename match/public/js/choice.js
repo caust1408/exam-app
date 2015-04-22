@@ -27,7 +27,7 @@ choice_form = function( jqueryMap, visited ) {
 
     
 
-	var numOfQuestions = 2;
+	var numOfQuestions = 7;
     var nums = 1;
     var count =0;
   var data = JSON.parse(multiple);
@@ -60,24 +60,22 @@ for (var i = 0;i < numOfQuestions; i++) {
     //////////////////////////////////////////////////////////////////////
    for (var j = 0;j < 4; j++) {
    	
-   		
-   		//console.log(this);
-   	 
-   	
-   	
    	
    	var choices = qtion.decoys[j];
+   	// added this so that I could add a form tag at the beginning
    	if(j === 0) {
    		//$('.bat').before('<form>');
    		$('.craig').append(
-      '<input type="radio" aria-label="..." class="bat" name="optradio"><label id="choice" class="lab"></label><br>');
+      '<form><input type="radio" aria-label="..." class="bat" name="optradio"><label id="choice" class="lab"></label><br>');
+   		$('.lab:last').html(choices + j);
     
     //$('Choice'+i':last').html(choices + j);
     }
+    // added this to add a closing form tag to group the radio buttons
     else if( j === 3) {
     	//$('.bat').after('</form>');
     	$('.craig').append(
-      '<input type="radio" aria-label="..." class="bat" name="optradio"><label id="choice" class="lab"></label><br>');
+      '<input type="radio" aria-label="..." class="bat" name="optradio"><label id="choice" class="lab"></label></form><br>');
 
     $('.lab:last').html(choices + j);
     }
@@ -92,7 +90,7 @@ for (var i = 0;i < numOfQuestions; i++) {
     
    
    }
-   $('.craig:last').append('</form>');
+   //$('.craig:last').append('</form>');
     // ends second for loop
    //$('.craig:last').append('</form>');
 
