@@ -49,12 +49,7 @@ for (var i = 0;i < numOfQuestions; i++) {
      //console.log('\n the answer is ' + JSON.stringify(ques.answer) + '\n'); 
 
     nums++;
-    $(function() {
-    	 $('.craig').append('<form>');
-    $('.craig').append('<div class="options" id="work"></div>');
-   		$('#work').attr('class', 'Choice' + count);
-   		count++;
-    });
+  
    
     //////////////////////////////choices displayed///////////////////////
     //////////////////////////////////////////////////////////////////////
@@ -66,8 +61,8 @@ for (var i = 0;i < numOfQuestions; i++) {
    	if(j === 0) {
    		//$('.bat').before('<form>');
    		$('.craig').append(
-      '<form><input type="radio" aria-label="..." class="bat" name="optradio"><label id="choice" class="lab"></label><br>');
-   		$('.lab:last').html(choices + j);
+        '<form><input type="radio" aria-label="..." class="bat" name="optradio"><label section="' +i +'" class="lab"></label><br>');
+   		$('.lab:last').html(choices);
     
     //$('Choice'+i':last').html(choices + j);
     }
@@ -75,16 +70,16 @@ for (var i = 0;i < numOfQuestions; i++) {
     else if( j === 3) {
     	//$('.bat').after('</form>');
     	$('.craig').append(
-      '<input type="radio" aria-label="..." class="bat" name="optradio"><label id="choice" class="lab"></label></form><br>');
+       '<input type="radio" aria-label="..." class="bat" name="optradio"><label section="' +i +'"class="lab"></label></form><br>');
 
-    $('.lab:last').html(choices + j);
+       $('.lab:last').html(choices);
     }
     else {
     	 $('.craig').append(
-      '<input type="radio" aria-label="..." class="bat" name="optradio"><label id="choice" class="lab"></label><br>');
+        '<input type="radio" aria-label="..." class="bat" name="optradio"><label section="' +i +'"class="lab"></label><br>');
 
-    $('.lab:last').html(choices + j);
-    console.log('    ' + JSON.stringify(qtion.decoys[j]));
+        $('.lab:last').html(choices);
+        console.log('    ' + JSON.stringify(qtion.decoys[j]));
 
     }// ends else
     
