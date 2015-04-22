@@ -53,6 +53,7 @@ for (var i = 0;i < numOfQuestions; i++) {
    
     //////////////////////////////choices displayed///////////////////////
     //////////////////////////////////////////////////////////////////////
+   $('.craig').append('<form>');
    for (var j = 0;j < 4; j++) {
    	
    	
@@ -61,7 +62,7 @@ for (var i = 0;i < numOfQuestions; i++) {
    	if(j === 0) {
    		//$('.bat').before('<form>');
    		$('.craig').append(
-        '<form><input type="radio" aria-label="..." class="bat" name="optradio"><label section="' +i +'" class="lab"></label><br>');
+        '<input type="radio" aria-label="..." class="rad" choicenum="' +count +'"><label section="' +i +'" class="lab"></label><br>');
    		$('.lab:last').html(choices);
     
     //$('Choice'+i':last').html(choices + j);
@@ -70,24 +71,25 @@ for (var i = 0;i < numOfQuestions; i++) {
     else if( j === 3) {
     	//$('.bat').after('</form>');
     	$('.craig').append(
-       '<input type="radio" aria-label="..." class="bat" name="optradio"><label section="' +i +'"class="lab"></label></form><br>');
+       '<input type="radio" aria-label="..." class="rad" choicenum="' +count +'"><label section="' +i +'"class="lab"></label><br>');
 
        $('.lab:last').html(choices);
     }
     else {
     	 $('.craig').append(
-        '<input type="radio" aria-label="..." class="bat" name="optradio"><label section="' +i +'"class="lab"></label><br>');
+        '<input type="radio" aria-label="..." class="rad" choicenum="' +count +'"><label section="' +i +'"class="lab"></label><br>');
 
         $('.lab:last').html(choices);
         console.log('    ' + JSON.stringify(qtion.decoys[j]));
 
     }// ends else
     
-   
+   count++;
    }
+
    //$('.craig:last').append('</form>');
     // ends second for loop
-   //$('.craig:last').append('</form>');
+   $('.craig').append('</form>');
 
 } // ends first for loop
 /////////////////////button displayed///////////////////////
