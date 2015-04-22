@@ -29,9 +29,12 @@ choice_form = function( jqueryMap, visited ) {
 
 	var numOfQuestions = 2;
     var nums = 1;
+    var count =0;
   var data = JSON.parse(multiple);
  jqueryMap.$choice.append('<div class="craig"></div>'); // had to move this outside of for loop to work, not sure why yet, I will look into it more
  //jqueryMap.$choice.append('<div class="num " id="work"></div>');
+ //////////////////////////////questions displayed//////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
 for (var i = 0;i < numOfQuestions; i++) {
 
   var qtion = data[i];
@@ -44,13 +47,23 @@ for (var i = 0;i < numOfQuestions; i++) {
      $('.cmp:last').html(nums + ') ' + question);
      
      //console.log('\n the answer is ' + JSON.stringify(ques.answer) + '\n'); 
-   
-
 
     nums++;
-    
-    
+    $(function() {
+    	 $('.craig').append('<form>');
+    $('.craig').append('<div class="options" id="work"></div>');
+   		$('#work').attr('class', 'Choice' + count);
+   		count++;
+    });
+   
+    //////////////////////////////choices displayed///////////////////////
+    //////////////////////////////////////////////////////////////////////
    for (var j = 0;j < 4; j++) {
+   	
+   		
+   		//console.log(this);
+   	 
+   	
    	
    	
    	var choices = qtion.decoys[j];
@@ -59,7 +72,7 @@ for (var i = 0;i < numOfQuestions; i++) {
    		$('.craig').append(
       '<input type="radio" aria-label="..." class="bat" name="optradio"><label id="choice" class="lab"></label><br>');
     
-    $('.lab:last').html(choices + j);
+    //$('Choice'+i':last').html(choices + j);
     }
     else if( j === 3) {
     	//$('.bat').after('</form>');
@@ -79,11 +92,12 @@ for (var i = 0;i < numOfQuestions; i++) {
     
    
    }
+   $('.craig:last').append('</form>');
     // ends second for loop
    //$('.craig:last').append('</form>');
 
 } // ends first for loop
-
+/////////////////////button displayed///////////////////////
 var buttonString = '<div class="row">'
 	                 + '<div class="col-xs-12 submit">'
 			   + '<button type="button" class="btn btn-primary btn-block submit-btn-fillin">Submit</button>'
